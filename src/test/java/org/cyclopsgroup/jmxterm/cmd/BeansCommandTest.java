@@ -66,7 +66,7 @@ public class BeansCommandTest
         command.setSession( new MockSession( output, conn ) );
         command.execute();
         context.assertIsSatisfied();
-        assertEquals( "a:type=1\na:type=2\nb:type=1\n", output.toString() );
+        assertEquals( String.format("a:type=1%1$sa:type=2%1$sb:type=1%1$s", System.getProperty("line.separator")) , output.toString() );
     }
 
     /**
@@ -92,7 +92,7 @@ public class BeansCommandTest
         command.setSession( session );
         command.execute();
         context.assertIsSatisfied();
-        assertEquals( "b:type=1\n", output.toString() );
+        assertEquals( "b:type=1" + System.getProperty("line.separator"), output.toString() );
     }
 
     /**
@@ -117,7 +117,7 @@ public class BeansCommandTest
         command.setSession( new MockSession( output, conn ) );
         command.execute();
         context.assertIsSatisfied();
-        assertEquals( "b:type=1\n", output.toString() );
+        assertEquals( "b:type=1" + System.getProperty("line.separator"), output.toString() );
     }
 
     /**
@@ -147,6 +147,6 @@ public class BeansCommandTest
         command.setSession( session );
         command.execute();
         context.assertIsSatisfied();
-        assertEquals( "a:type=1\na:type=2\nb:type=1\n", output.toString() );
+        assertEquals( String.format("a:type=1%1$sa:type=2%1$sb:type=1%1$s", System.getProperty("line.separator")), output.toString() );
     }
 }
