@@ -19,6 +19,8 @@ import org.cyclopsgroup.jcli.annotation.MultiValue;
 import org.cyclopsgroup.jcli.annotation.Option;
 import org.cyclopsgroup.jmxterm.Command;
 import org.cyclopsgroup.jmxterm.Session;
+import org.cyclopsgroup.jmxterm.io.IValueOutputFormat;
+import org.cyclopsgroup.jmxterm.io.JsonOutputFormat;
 import org.cyclopsgroup.jmxterm.io.ValueOutputFormat;
 
 /**
@@ -41,6 +43,8 @@ public class GetCommand
     private boolean showQuotationMarks;
 
     private boolean simpleFormat;
+    
+    private boolean jsonFormat;
 
     @SuppressWarnings( "unchecked" )
     private void displayAttributes()
@@ -75,7 +79,7 @@ public class GetCommand
                 }
             }
         }
-        ValueOutputFormat format = new ValueOutputFormat( 2, showDescription, showQuotationMarks );
+        IValueOutputFormat format = jsonFormat ? new JsonOutputFormat() : new ValueOutputFormat( 2, showDescription, showQuotationMarks );
         for ( Map.Entry<String, MBeanAttributeInfo> entry : attributeNames.entrySet() )
         {
             String attributeName = entry.getKey();
@@ -211,5 +215,11 @@ public class GetCommand
     {
         this.simpleFormat = simpleFormat;
     }
-
+    
+    @Option( name = "j", longName = "json", description = "Print expressions in JSON format" )
+    public final void setJsonFormat( boolean jsonFormat )
+    {
+        this.jsonFormat = jsonFormat;
+    }
+    
 }

@@ -14,7 +14,7 @@ import org.apache.commons.lang.Validate;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  */
-public class ValueOutputFormat
+public class ValueOutputFormat implements IValueOutputFormat
 {
     private final int indentSize;
 
@@ -51,7 +51,8 @@ public class ValueOutputFormat
      * @param value Value of variable
      * @param description Description of variable
      */
-    public void printExpression( CommandOutput output, Object name, Object value, String description )
+    @Override
+    public void printExpression( CommandOutput output, String name, Object value, String description )
     {
         printExpression( output, name, value, description, 0 );
     }
@@ -83,6 +84,7 @@ public class ValueOutputFormat
      * @param output Output writer where value is printed to
      * @param value Value to print
      */
+    @Override
     public void printValue( CommandOutput output, Object value )
     {
         printValue( output, value, 0 );
