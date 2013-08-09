@@ -20,8 +20,8 @@ import org.cyclopsgroup.jcli.annotation.Option;
 import org.cyclopsgroup.jmxterm.Command;
 import org.cyclopsgroup.jmxterm.Session;
 import org.cyclopsgroup.jmxterm.io.IValueOutputFormat;
-import org.cyclopsgroup.jmxterm.io.JsonOutputFormat;
 import org.cyclopsgroup.jmxterm.io.ValueOutputFormat;
+import org.cyclopsgroup.jmxterm.io.json.JsonOutputFormat;
 
 /**
  * Get value of MBean attribute(s)
@@ -216,7 +216,10 @@ public class GetCommand
         this.simpleFormat = simpleFormat;
     }
     
-    @Option( name = "j", longName = "json", description = "Print expressions in JSON format" )
+    /**
+     * @param jsonFormat True if value is printed out in JSON format
+     */
+    @Option( name = "j", longName = "json", description = "Print values in JSON format" )
     public final void setJsonFormat( boolean jsonFormat )
     {
         this.jsonFormat = jsonFormat;
