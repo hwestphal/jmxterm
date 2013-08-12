@@ -80,6 +80,9 @@ public class GetCommand
             }
         }
         IValueOutputFormat format = jsonFormat ? new JsonOutputFormat() : new ValueOutputFormat( 2, showDescription, showQuotationMarks );
+        if (jsonFormat && !simpleFormat) {
+        	session.output.println("{");
+        }
         for ( Map.Entry<String, MBeanAttributeInfo> entry : attributeNames.entrySet() )
         {
             String attributeName = entry.getKey();
@@ -102,6 +105,9 @@ public class GetCommand
                 session.output.printMessage( i.getName() + " is not readable" );
             }
         }
+        if (jsonFormat && !simpleFormat) {
+        	session.output.println("}");
+        }        
     }
 
     /**
@@ -219,7 +225,7 @@ public class GetCommand
     /**
      * @param jsonFormat True if value is printed out in JSON format
      */
-    @Option( name = "j", longName = "json", description = "Print values in JSON format" )
+    @Option( name = "j", longName = "json", description = "Print values in JSON format (-i and -q are ignored)" )
     public final void setJsonFormat( boolean jsonFormat )
     {
         this.jsonFormat = jsonFormat;
